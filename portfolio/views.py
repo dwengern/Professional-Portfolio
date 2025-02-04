@@ -30,13 +30,13 @@ def add_car(request, model_name):
     
     return render(request, 'add_car.html', {'form': form, 'model_name': model_name})
 
-def edit_car(request, model_name, pk):
+def edit_car(request, model_name, guestID):
     model_class = get_model_by_name(model_name)
     model = model_class[0]
-    if not model_class:
+    if not model:
         return render(request, '404.html', status=404)
     
-    car = get_object_or_404(model, pk=pk)
+    car = get_object_or_404(model, guestID=guestID)
     DynamicCarForm = get_dynamic_form(model_name)
 
     if request.method == 'POST':
@@ -51,13 +51,13 @@ def edit_car(request, model_name, pk):
 
     return render(request, 'edit_car.html', {'form': form, 'car': car, 'model_name': model_name})
 
-def delete_car(request, model_name, pk):
+def delete_car(request, model_name, guestID):
     model_class = get_model_by_name(model_name)
     model = model_class[0]
     if not model:
         return render(request, '404.html', status=404)
     
-    car = get_object_or_404(model, pk=pk)
+    car = get_object_or_404(model, guestID=guestID)
 
     if request.method == 'POST':
         car.delete()

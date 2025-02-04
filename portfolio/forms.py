@@ -9,28 +9,20 @@ class LoginForm(AuthenticationForm):
 class AllCarsForm(forms.ModelForm):
     class Meta:
         model = ValetCars
-        fields = '__all__'
+        exclude = ['guestID']
 
 def get_dynamic_form(model_name):
     model_info = get_model_by_name(model_name)
     if not model_info:
         raise ValueError(f"Model '{model_name}' not found.")
-    
+
     model, required_fields = model_info
 
-    class DynamicValetForm(forms.ModelForm):
-        def __init__(self, *args, **kwargs):
-            super(DynamicValetForm, self).__init__(*args, **kwargs)
-            for field_name in required_fields:
-                if field_name in self.fields:
-                    self.fields[field_name].required = True
-            for field_name, field in self.fields.items():
-                if field_name not in required_fields:
-                    field.required = False
-
-        class Meta:
-            model_class = get_model_by_name(model_name)
-            model = model_class[0]
-            fields = '__all__'
-
-    return DynamicValetForm
+    return type(
+        "DynamicValetForm",
+        (forms.ModelForm,),
+        {
+            "Meta": type("Meta", (), {"model": model, "fields":[field for field in required_fields if field != 'guestID']}),
+            "__init__": lambda self, *args, **kwargs: super(self.__class__, self).__init__(*args, **kwargs)
+        }
+    )

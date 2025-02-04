@@ -12,6 +12,6 @@ urlpatterns = [
     path("valet_system", views.valet_system, name="valet_system"),
 
     path("add_car/<str:model_name>/", views.add_car, name="add_car"),
-    path("edit_car/<str:model_name>/<int:pk>/", views.edit_car, name='edit_car'),
-    path("delete_car/<str:model_name>/<int:pk>/", views.delete_car, name='delete_car'),
+    path("edit_car/<str:model_name>/<int:guestID>/", views.edit_car, name='edit_car'),
+    path("delete_car/<str:model_name>/<int:guestID>/", views.delete_car, name='delete_car'),
 ]
