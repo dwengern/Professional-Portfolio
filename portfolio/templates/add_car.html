@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block title %}
+    Add New Car
+{% endblock %}
+{% block content %}
+
+<h1>Add a New Car to System</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Car</button>
+</form>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const ticketNum = urlParams.get('ticket_num');
+
+        if (ticketNum) {
+            document.getElementById('ticketNum').value = ticketNum;
+        }
+    });
+</script>
+{% endblock %}

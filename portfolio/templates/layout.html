@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{% block title %}{% endblock %}</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'style.css' %}"/>
+    </head>
+    <body>
+        <div class="navbar-content">
+            <ul class="navbar">
+                <li><a href="{% url 'home' %}" class="navbar-item">Home</a></li>
+                <li><a href="{% url 'projects_home' %}" class="navbar-item">Projects</a></li>
+                <li><a href="{% url 'photography_home' %}" class="navbar-item">Photography</a></li>
+                <li><a href="{% url 'valet_system' %}" class="navbar-item">Valet System</a></li>
+                <li id="last-navbar-item"><a href="{% url 'about' %}" class="navbar-item">About</a></li>
+            </ul>
+        </div>
+
+        <div class="body-content">
+            {% block content %}
+            {% endblock %}
+            <footer>
+                <p>&copy; Nicholas Dwenger 2025</p>
+            </footer>
+        </div>
+    </body>
+</html>
