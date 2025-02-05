@@ -1,11 +1,13 @@
 from django.db import models
 from django.utils import timezone
+from django.core.validators import MaxValueValidator, MinValueValidator
 import random
 
 class ValetCars(models.Model):
     guestID = models.CharField(primary_key=True, max_length=5, unique=True)
     ticketNum = models.IntegerField()
     lastName = models.CharField(max_length=50)
+    roomNum = models.IntegerField(default=0, validators=[MinValueValidator(400), MaxValueValidator(9999)])
     departureDate = models.DateTimeField()
     carMake = models.CharField(max_length=50)
     carModel = models.CharField(max_length=50)
@@ -29,6 +31,6 @@ class ValetCars(models.Model):
     
 def get_model_by_name(model_name):
     model_mapping = {
-        'valetcars': (ValetCars, ['ticketNum', 'lastName', 'departureDate', 'carMake', 'carModel', 'carColor']),
+        'valetcars': (ValetCars, ['ticketNum', 'lastName', 'roomNum', 'departureDate', 'carMake', 'carModel', 'carColor']),
     }
     return model_mapping.get(model_name.lower())
