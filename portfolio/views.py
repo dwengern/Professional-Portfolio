@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib import messages
+from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import LoginForm, AllCarsForm, get_dynamic_form
 from .models import ValetCars, get_model_by_name
+import os
 
 def home(request):
     return render(request, 'home.html')
@@ -12,7 +14,21 @@ def about(request):
     return render(request, 'about.html')
 
 def photography_home(request):
-    return render(request, 'photography_home.html')
+    img_folders = [
+        os.path.join(settings.BASE_DIR, 'portfolio', 'static', 'img', 'jpg', 'proj-1'), 
+        os.path.join(settings.BASE_DIR, 'portfolio', 'static', 'img', 'jpg', 'proj-2'), 
+        os.path.join(settings.BASE_DIR, 'portfolio', 'static', 'img', 'jpg', 'proj-3')
+    ]
+    
+    images = []
+
+    for folder in img_folders:
+        folder_name = folder.split('/')[-1]  # Extract folder name (proj-1, proj-2, etc.)
+        images += [f"img/jpg/{folder_name}/{file}" for file in os.listdir(folder) if file.lower().endswith(('.jpg', '.jpeg', '.png'))]
+
+    print(images)
+    
+    return render(request, 'photography_home.html', {'photosArray': images})
 
 def projects_home(request):
     return render(request, 'projects_home.html')

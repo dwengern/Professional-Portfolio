@@ -1,9 +1,62 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.body-content {
+    flex-grow: 1;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+}
+
 .navbar {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: #333;
+}
+
+.photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    list-style-type: none; 
+    padding: 0;
+}
+
+.photo-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: none;
+}
+
+.photo-link img {
+    max-width: 100%;
+    height: auto;
+    border: solid 2px black;
+}
+
+.valet-container {
+    margin: 10px;
+}
+
+.array-output {
+    margin: 20px;
+    padding: 20px;
 }
 
 li {

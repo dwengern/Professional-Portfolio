@@ -2,6 +2,16 @@
 {% block title %}
     Photography Home
 {% endblock %}
+{% load static %}
 {% block content %}
-    <p>Photography home page where people can see all my collections and bodies of work.  Clicking on any album will display all the pictures that are included in it.</p>
+    <h1 style="text-align: center;">Photos</h1>
+    <div class="array-output">
+        <ul class="photo-gallery">
+        {% for photo in photosArray %}
+            <li class="photo-link">
+                <img src="{% static photo %}" alt="{{ photo }}">
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
 {% endblock %}
