@@ -136,3 +136,19 @@ GitHub.sublime-settings
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
+
+# Ignore SQLite database
+db.sqlite3
+
+# Ignore Python bytecode and pycache directories
+__pycache__/
+*.pyc
+
+# Ignore static and collected static files
+static/
+static_collected/
+
+# Ignore specific Python and media files
+portfolio/img_convert.py
+portfolio/static/img/
+static_collected/img/
